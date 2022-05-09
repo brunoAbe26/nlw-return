@@ -9,8 +9,8 @@ const submitFeedback = new SubmitFeedbackUseCase(
 );
 
 describe("Submit feedback", () => {
-  it("should be able to submit a feedback", () => {
-    expect(
+  it("should be able to submit a feedback", async () => {
+    await expect(
       submitFeedback.execute({
         type: "BUG",
         comment: "example comment",
@@ -22,8 +22,8 @@ describe("Submit feedback", () => {
     expect(sendMailSpy).toHaveBeenCalled();
   });
 
-  it("should not be able to submit a feedback without type", () => {
-    expect(
+  it("should not be able to submit a feedback without type", async () => {
+    await expect(
       submitFeedback.execute({
         type: "",
         comment: "example comment",
@@ -32,8 +32,8 @@ describe("Submit feedback", () => {
     ).rejects.toThrow();
   });
 
-  it("should not be able to submit a feedback without comment", () => {
-    expect(
+  it("should not be able to submit a feedback without comment", async () => {
+    await expect(
       submitFeedback.execute({
         type: "BUG",
         comment: "",
@@ -42,8 +42,8 @@ describe("Submit feedback", () => {
     ).rejects.toThrow();
   });
 
-  it("should not be able to submit a feedback with an invalid screenshot", () => {
-    expect(
+  it("should not be able to submit a feedback with an invalid screenshot", async () => {
+    await expect(
       submitFeedback.execute({
         type: "BUG",
         comment: "example comment",
